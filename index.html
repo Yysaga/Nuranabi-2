@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Komik 25 Nabi - Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fdfaf6;
+            color: #4a4a4a;
+            margin: 0;
+        }
+
+        /* Container untuk Buku */
+        .book-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* Area Canvas Buku */
+        #book-container {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background-color: white;
+        }
+
+        .page {
+            padding: 0;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Mencegah gambar di-drag */
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Warna Pastel untuk Katalog */
+        .card-mint { background-color: #e2f3f0; }
+        .card-rose { background-color: #f9ecec; }
+    </style>
+</head>
+<body>
+
+    <header class="py-10 text-center">
+        <h1 class="text-3xl font-semibold text-gray-800">Preview Komik 25 Nabi</h1>
+        <p class="text-gray-500 font-light mt-1">Sentuh dan tarik sudut halaman untuk membuka buku</p>
+    </header>
+
+    <section class="book-section">
+        <div id="book-container">
+            <div class="page">
+                <img src="images/cover.jpg" alt="Cover">
+            </div>
+            <div class="page">
+                <img src="images/hal1.jpg" alt="Halaman 1">
+            </div>
+            <div class="page">
+                <img src="images/hal2.jpg" alt="Halaman 2">
+            </div>
+            <div class="page">
+                <img src="images/hal3.jpg" alt="Halaman 3">
+            </div>
+        </div>
+
+        <div class="flex gap-10 mt-8">
+            <button id="prevBtn" class="bg-white border px-6 py-2 rounded-full shadow-sm hover:bg-gray-50">← Sebelumnya</button>
+            <button id="nextBtn" class="bg-white border px-6 py-2 rounded-full shadow-sm hover:bg-gray-50">Berikutnya →</button>
+        </div>
+    </section>
+
+    <hr class="border-gray-100 my-10">
+
+    <section class="max-w-4xl mx-auto px-6 pb-20">
+        <h2 class="text-2xl font-semibold mb-8 text-center">Bawa Pulang Kisah Lengkapnya</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="card-mint p-8 rounded-[32px] flex flex-col justify-between shadow-sm">
+                <div>
+                    <h3 class="text-xl font-semibold">Buku Fisik (Hardcopy)</h3>
+                    <p class="text-sm text-gray-600 mt-2">Kertas premium kualitas tinggi, sangat pas untuk koleksi anak di rumah.</p>
+                </div>
+                <div class="mt-8">
+                    <a href="https://shopee.co.id/" class="block w-full bg-orange-500 text-white text-center py-3 rounded-xl font-medium mb-3">Beli di Shopee</a>
+                    <a href="https://wa.me/62812345678" class="block w-full bg-white text-green-600 border border-green-200 text-center py-3 rounded-xl font-medium">Tanya via WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="card-rose p-8 rounded-[32px] flex flex-col justify-between shadow-sm">
+                <div>
+                    <h3 class="text-xl font-semibold">E-Book (Digital)</h3>
+                    <p class="text-sm text-gray-600 mt-2">Format PDF resolusi tinggi. Cocok untuk dibaca di iPad atau tablet kapan saja.</p>
+                </div>
+                <div class="mt-8">
+                    <a href="https://wa.me/62812345678" class="block w-full bg-gray-800 text-white text-center py-3 rounded-xl font-medium">Pesan via WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    
+    <script>
+        // Inisialisasi Efek Buku
+        const pageFlip = new St.PageFlip(document.getElementById('book-container'), {
+            width: 400, // Ukuran lebar satu halaman
+            height: 570, // Ukuran tinggi satu halaman (sesuaikan dengan rasio 7:10)
+            size: "stretch",
+            minWidth: 300,
+            maxWidth: 600,
+            minHeight: 420,
+            maxHeight: 850,
+            maxShadowOpacity: 0.5,
+            showCover: true,
+            mobileScrollSupport: false // Agar tidak bentrok saat scroll layar hp
+        });
+
+        // Load halaman dari HTML
+        pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+        // Tombol Navigasi
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            pageFlip.flipPrev();
+        });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            pageFlip.flipNext();
+        });
+
+        // Proteksi Tambahan: Matikan Klik Kanan
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
